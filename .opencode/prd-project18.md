@@ -341,8 +341,12 @@ Fechamento: E2E versionado exit 0 + relato dos três blocos.
 
 ## 9. Registro de desvios
 
-(istmo durante a execução: qualquer desvio do escopo/acima é registrado aqui
-com evidência, como no PRD do projeto 17.)
+- D18-dev1 (registrado no início da execução): a tool `spawn_agent` desta
+  sandbox é READ-ONLY — não edita arquivos. A produção das fases é feita pelo
+  agente principal (como no projeto 17); subagentes read-only continuam sendo
+  usados para investigação e verificação de conformidade. Os recortes sK do
+  PRD §7 passam a delimitar donos de arquivo por onda de trabalho do agente
+  principal, não agentes de produção.
 
 ## 10. Estado esperado do roadmap ao fim deste remix
 
