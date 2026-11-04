@@ -50,7 +50,7 @@ import { gradeEssay } from "@/lib/pte/essay";
 import { gradeReorder } from "@/lib/pte/reorder";
 import { gradeMulti, gradeSingle } from "@/lib/pte/mcq";
 import { gradeSst, gradeSwt } from "@/lib/pte/summary";
-import { gradeSpeechQuestion } from "@/lib/pte/examSpeech";
+import { gradeSpeechQuestion, type SpeechQuestion } from "@/lib/pte/examSpeech";
 import { DESCRIBE_IMAGE_ASSETS } from "@/lib/pte/describeImageAssets";
 import {
   addSessionRecord,
