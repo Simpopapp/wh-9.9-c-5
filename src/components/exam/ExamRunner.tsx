@@ -101,43 +101,6 @@ function parsePartialJson(raw: string | null | undefined): unknown {
 
 // ---------- Widget: Speaking (RA / RS / RL / ASQ) ----------
 
-/**
- * Gradador por tipo de fala (D6): prática e exame usam a MESMA política
- * (oralPolicy) sobre o mesmo OralInput — o gradador é o único ponto variável.
- */
-function gradeSpeechQuestion(
-  question: SpeechQuestion,
-  transcript: string,
-  durationMs: number,
-  pauses: number,
-): { score: number } {
-  if (question.taskType === "retell_lecture") {
-    return { score: gradeRetell(question.transcript, transcript, durationMs, pauses).score };
-  }
-  if (question.taskType === "answer_short") {
-    return { score: gradeAnswerShort(question.answer, transcript).score };
-  }
-  if (question.taskType === "summarize_group_discussion") {
-    // SGD: correção contra a transcrição completa da discussão.
-    return { score: gradeRetell(question.text, transcript, durationMs, pauses).score };
-  }
-  if (question.taskType === "respond_to_situation") {
-    // RTS: correção contra as keywords da resposta modelo.
-    return {
-      score: gradeRetell(question.sample || question.text, transcript, durationMs, pauses).score,
-    };
-  }
-  if (question.taskType === "describe_image") {
-    // DI: correção contra a descrição de referência verificada.
-    return { score: gradeRetell(question.text, transcript, durationMs, pauses).score };
-  }
-  const reference =
-    question.taskType === "repeat_sentence"
-      ? question.answer || question.transcript
-      : question.text;
-  return { score: gradeRepeatSentence(reference, transcript, durationMs, pauses).score };
-}
-
 function SpeechWidget({
   question,
   registerSubmit,
