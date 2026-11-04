@@ -66,13 +66,24 @@ describe("Integridade do banco", () => {
     ).toEqual([]);
   });
 
-  it("HIW: índices de erro cabem no texto", () => {
+  it("HIW: índices de erro cabem no texto e divergem exatamente no áudio (D18-0a)", () => {
     expect(
       failures((q) => {
         if (q.taskType !== "lst_hiw") return null;
-        const n = q.text.split(/\s+/).length;
+        const toks = q.text.split(/\s+/);
         if (q.errorIndexes.length === 0) return "sem erros marcados";
-        return q.errorIndexes.some((i) => i < 0 || i >= n) ? "índice fora do texto" : null;
+        const out = q.errorIndexes.some((i) => i < 0 || i >= toks.length)
+          ? "índice fora do texto"
+          : null;
+        if (out) return out;
+        // D18-0a: sem transcrição falada DISTINTA a tarefa é insolvável — o
+        // TTS leria o texto exibido e o gabarito cobraria erros inexistentes.
+        if (!q.transcript.trim() || q.transcript === q.text) return "sem transcript distinto";
+        const spoken = q.transcript.split(/\s+/);
+        if (spoken.length !== toks.length) return "transcript com nº de palavras distinto";
+        const diff = toks.map((t, i) => (t !== spoken[i] ? i : -1)).filter((i) => i >= 0);
+        if (diff.length !== q.errorIndexes.length) return "divergências ≠ gabarito";
+        return q.errorIndexes.every((i, k) => diff[k] === i) ? null : "gabarito desalinhado";
       }),
     ).toEqual([]);
   });
