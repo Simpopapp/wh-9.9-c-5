@@ -228,7 +228,16 @@ function build(taskType: TaskType, json: unknown): Question[] {
           trap: str(q["trap"]),
         });
         break;
-      case "lst_hiw":
+      case "lst_hiw": {
+        // D18-0a: HIW sem transcrição falada DISTINTA do texto exibido é
+        // insolvável (o TTS leria o texto exibido e o gabarito cobraria erros
+        // que não existem no áudio). Defeito de dados nunca silencioso:
+        // item excluído do banco com aviso — o teste de contrato (bank-
+        // integrity) garante que nenhum item chegado chegue a esse ponto.
+        if (!base.transcript || base.transcript === base.text) {
+          console.warn(`[catalog] lst_hiw ${base.id} sem transcript distinto — item excluído`);
+          break;
+        }
         out.push({
           ...base,
           taskType,
@@ -239,6 +248,7 @@ function build(taskType: TaskType, json: unknown): Question[] {
           trap: str(q["trap"]),
         });
         break;
+      }
       case "mcq_single":
       case "mcq_multi":
       case "lst_mcq":

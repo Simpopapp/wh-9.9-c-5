@@ -1,5 +1,6 @@
 import { AlertCircle, Sparkles } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import type { AiGradeResult } from "@/lib/plus/aiGradeSchemas";
 import { cn } from "@/lib/utils";
 
@@ -31,10 +32,13 @@ type AiGradeState =
 export function AiGradeFeedback({
   state,
   recordedScore,
+  onRetry,
 }: {
   state: AiGradeState;
   /** Nota registrada no progresso (avaliação básica) — exibida para contexto. */
   recordedScore: number | null;
+  /** D18-0c: retry honesto no estado indisponível — reexecuta a mesma análise. */
+  onRetry?: () => void;
 }) {
   if (state.status === "off") return null;
 
@@ -62,6 +66,11 @@ export function AiGradeFeedback({
         <p className="mt-1 text-xs text-muted-foreground">
           {state.reason} A nota abaixo é da avaliação básica determinística.
         </p>
+        {onRetry ? (
+          <Button variant="outline" size="sm" className="mt-3" onClick={onRetry}>
+            Tentar novamente
+          </Button>
+        ) : null}
       </div>
     );
   }

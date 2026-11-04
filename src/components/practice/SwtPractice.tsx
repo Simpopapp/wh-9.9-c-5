@@ -42,7 +42,7 @@ export function SwtPractice({ question }: { question: SwtQuestion }) {
   /** Resposta submetida — dispara a análise IA (D14-1a) uma vez por envio. */
   const [submitted, setSubmitted] = useState<string | null>(null);
   const recordedRef = useRef(false);
-  const aiState = useAiGrade({
+  const { state: aiState, retry: retryAi } = useAiGrade({
     kind: "swt",
     taskType: "swt",
     questionText: question.text,
@@ -195,7 +195,7 @@ export function SwtPractice({ question }: { question: SwtQuestion }) {
       {phase === "result" && grade ? (
         <div className="mt-6 space-y-4">
           <TemplateWarning verdict={template} />
-          <AiGradeFeedback state={aiState} recordedScore={grade.score} />
+          <AiGradeFeedback state={aiState} recordedScore={grade.score} onRetry={retryAi} />
           <div className="rounded-2xl border border-border/60 bg-card p-6">
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-primary/10 px-3 py-1 font-serif text-lg font-semibold text-primary tabular-nums">

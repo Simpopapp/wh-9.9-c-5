@@ -21,9 +21,13 @@ export function useAiGrade(input: {
   /** Resposta submetida ou null (ainda não submeteu). */
   response: string | null;
   sample?: string | undefined;
-}): AiGradeState {
+}): { state: AiGradeState; retry: () => void } {
   const [state, setState] = useState<AiGradeState>(OFF);
   const runRef = useRef(0);
+  // D18-0c: retry honesto — reexecuta a MESMA análise (cache v3 primeiro, então
+  // o retry só gasta chamada quando a anterior não foi cacheada com sucesso).
+  const [retryNonce, setRetryNonce] = useState(0);
+  const retry = () => setRetryNonce((n) => n + 1);
 
   useEffect(() => {
     if (!input.response) {
@@ -52,11 +56,11 @@ export function useAiGrade(input: {
         if (run !== runRef.current) return;
         setState({ status: "unavailable", reason: "Falha temporária na análise." });
       });
-    // input.response muda por submissão; os demais campos são estáveis por questão.
+    // input.response muda por submissão; retryNonce só muda no retry explícito.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [input.response]);
+  }, [input.response, retryNonce]);
 
-  return state;
+  return { state, retry };
 }
 
 /**

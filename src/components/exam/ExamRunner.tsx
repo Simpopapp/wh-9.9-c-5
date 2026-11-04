@@ -50,7 +50,7 @@ import { gradeEssay } from "@/lib/pte/essay";
 import { gradeReorder } from "@/lib/pte/reorder";
 import { gradeMulti, gradeSingle } from "@/lib/pte/mcq";
 import { gradeSst, gradeSwt } from "@/lib/pte/summary";
-import { gradeAnswerShort, gradeRepeatSentence, gradeRetell } from "@/lib/pte/speaking";
+import { gradeSpeechQuestion, type SpeechQuestion } from "@/lib/pte/examSpeech";
 import { DESCRIBE_IMAGE_ASSETS } from "@/lib/pte/describeImageAssets";
 import {
   addSessionRecord,
@@ -72,15 +72,8 @@ import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useSpeechSynthesis } from "@/lib/useSpeechSynthesis";
 import { cn } from "@/lib/utils";
 
-type SpeechQuestion =
-  | ReadAloudQuestion
-  | RepeatSentenceQuestion
-  | RetellLectureQuestion
-  | AnswerShortQuestion
-  // Fase 7: os 3 tipos novos também são fala (DI mostra a imagem no lugar do texto).
-  | SgdQuestion
-  | RespondSituationQuestion
-  | DescribeImageQuestion;
+// SpeechQuestion e o gradador por tipo de fala vivem em @/lib/pte/examSpeech
+// (D18-0b): prática e exame compartilham a MESMA política oral (oralPolicy).
 
 interface ExamWidgetProps {
   /** Registra o submit da questão — o cronômetro chama ao zerar (auto-submit). */
@@ -107,43 +100,6 @@ function parsePartialJson(raw: string | null | undefined): unknown {
 }
 
 // ---------- Widget: Speaking (RA / RS / RL / ASQ) ----------
-
-/**
- * Gradador por tipo de fala (D6): prática e exame usam a MESMA política
- * (oralPolicy) sobre o mesmo OralInput — o gradador é o único ponto variável.
- */
-function gradeSpeechQuestion(
-  question: SpeechQuestion,
-  transcript: string,
-  durationMs: number,
-  pauses: number,
-): { score: number } {
-  if (question.taskType === "retell_lecture") {
-    return { score: gradeRetell(question.transcript, transcript, durationMs, pauses).score };
-  }
-  if (question.taskType === "answer_short") {
-    return { score: gradeAnswerShort(question.answer, transcript).score };
-  }
-  if (question.taskType === "summarize_group_discussion") {
-    // SGD: correção contra a transcrição completa da discussão.
-    return { score: gradeRetell(question.text, transcript, durationMs, pauses).score };
-  }
-  if (question.taskType === "respond_to_situation") {
-    // RTS: correção contra as keywords da resposta modelo.
-    return {
-      score: gradeRetell(question.sample || question.text, transcript, durationMs, pauses).score,
-    };
-  }
-  if (question.taskType === "describe_image") {
-    // DI: correção contra a descrição de referência verificada.
-    return { score: gradeRetell(question.text, transcript, durationMs, pauses).score };
-  }
-  const reference =
-    question.taskType === "repeat_sentence"
-      ? question.answer || question.transcript
-      : question.text;
-  return { score: gradeRepeatSentence(reference, transcript, durationMs, pauses).score };
-}
 
 function SpeechWidget({
   question,

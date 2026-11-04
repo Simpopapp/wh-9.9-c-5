@@ -10,17 +10,18 @@
       "id": "pte-lst_hi-bf40243b",
       "answer": "",
       "errors": [
-        5,
-        12,
-        17,
-        19,
-        33
+        6,
+        15,
+        23,
+        26,
+        37
       ],
-      "explanation": "Word 5 ('gaining' vs. 'losing'), word 12 ('1980s' vs. '1990s'), word 17 ('East' vs. 'West'), word 19 ('cooling' vs. 'warming'), and word 33 ('coastal' vs. 'inland') all differ between the transcript and the audio.",
+      "explanation": "Substituted in the audio: 'gaining' (vs. 'losing'), '1980s' (vs. '1990s'), 'East' (vs. 'West'), 'cooling' (vs. 'warming') and 'coastal' (vs. 'inland') — these words differ between the audio and the transcript shown.",
       "trap": "Read the transcript ahead and predict likely substitution points (dates, directions, polarity words). Highlight only what differed — over-highlighting incurs negative marking.",
       "topic": "academic lecture",
       "source": "pteracai-seed",
-      "word_count": 39
+      "word_count": 39,
+      "transcript": "The Antarctic ice sheet has been gaining mass at an accelerating rate since the early 1980s, with most of the loss concentrated in East Antarctica where cooling ocean currents are eroding the floating ice shelves that buttress coastal glaciers."
     },
     {
       "text": "Anthropologists who study small-scale societies have documented a remarkable diversity of marriage and family arrangements, and the pattern that holds is not monogamy but flexibility: different communities adopt different rules in response to ecological pressure, resource scarcity, and historical contact with neighbours.",
@@ -29,32 +30,35 @@
       "errors": [
         3,
         9,
-        20,
         24,
-        31,
-        34
+        25,
+        28,
+        36,
+        39
       ],
-      "explanation": "'large-scale' (vs. small-scale), 'uniformity' (vs. diversity), 'rigidity' (vs. flexibility), 'similar' (vs. different), 'abundance' (vs. scarcity), 'isolation' (vs. contact) all differ. The transcript reverses the polarity of nearly every claim.",
+      "explanation": "Substituted in the audio: 'large-scale' (vs. 'small-scale'), 'uniformity' (vs. 'diversity'), 'rigidity' (vs. 'flexibility'), 'similar' (vs. 'different'), 'similar' (vs. 'different'), 'abundance' (vs. 'scarcity') and 'isolation' (vs. 'contact') — these words differ between the audio and the transcript shown.",
       "trap": "Mass-polarity-reversal questions reward listeners who note the direction of every claim in the audio. Don't get distracted by the unchanged words — about 80% of the transcript matches, and your job is to spot the 20%.",
       "topic": "academic lecture",
       "source": "pteracai-seed",
-      "word_count": 42
+      "word_count": 42,
+      "transcript": "Anthropologists who study large-scale societies have documented a remarkable uniformity of marriage and family arrangements, and the pattern that holds is not monogamy but rigidity: similar communities adopt similar rules in response to ecological pressure, resource abundance, and historical isolation with neighbours."
     },
     {
       "text": "Renewable hydrogen is produced by passing electricity through water to split it into hydrogen and oxygen, a process called electrolysis. The hydrogen can then be stored, transported, and burned in fuel cells with water as the only emission, which makes it attractive for sectors like steel manufacturing and heavy transport that are difficult to electrify directly.",
       "id": "pte-lst_hi-d8a61e2e",
       "answer": "",
       "errors": [
-        14,
-        27,
-        35,
-        38
+        15,
+        33,
+        45,
+        48
       ],
-      "explanation": "'nitrogen' (vs. oxygen), 'carbon' (vs. water), 'coal' (vs. steel), 'light' (vs. heavy) differ between the transcript and the spoken audio.",
+      "explanation": "Substituted in the audio: 'nitrogen' (vs. 'oxygen'), 'carbon' (vs. 'water'), 'coal' (vs. 'steel') and 'light' (vs. 'heavy') — these words differ between the audio and the transcript shown.",
       "trap": "Three of the four substitutions are technically nonsensical (electrolysis doesn't produce nitrogen, fuel cells don't emit carbon). Domain knowledge helps you predict where the transcript is likely to be wrong, but always rely on what you actually hear.",
       "topic": "academic lecture",
       "source": "pteracai-seed",
-      "word_count": 56
+      "word_count": 56,
+      "transcript": "Renewable hydrogen is produced by passing electricity through water to split it into hydrogen and nitrogen, a process called electrolysis. The hydrogen can then be stored, transported, and burned in fuel cells with carbon as the only emission, which makes it attractive for sectors like coal manufacturing and light transport that are difficult to electrify directly."
     }
   ]
 }
