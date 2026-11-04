@@ -16,6 +16,8 @@ const base = {
   section: "speaking" as const,
   prompt: "p",
   audioText: "",
+  transcript: "",
+  gradingNotes: "",
   wordCount: 10,
   topic: "t",
   source: "s",
