@@ -66,7 +66,7 @@ function ExamAiAnalysis({
   }
   return (
     <div className="mt-3">
-      <AiGradeFeedback state={state} recordedScore={score} />
+      <AiGradeFeedback state={state} recordedScore={score} onRetry={request} />
     </div>
   );
 }
