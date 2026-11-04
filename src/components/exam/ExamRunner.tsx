@@ -50,7 +50,7 @@ import { gradeEssay } from "@/lib/pte/essay";
 import { gradeReorder } from "@/lib/pte/reorder";
 import { gradeMulti, gradeSingle } from "@/lib/pte/mcq";
 import { gradeSst, gradeSwt } from "@/lib/pte/summary";
-import { gradeAnswerShort, gradeRepeatSentence, gradeRetell } from "@/lib/pte/speaking";
+import { gradeSpeechQuestion } from "@/lib/pte/examSpeech";
 import { DESCRIBE_IMAGE_ASSETS } from "@/lib/pte/describeImageAssets";
 import {
   addSessionRecord,
@@ -72,15 +72,8 @@ import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useSpeechSynthesis } from "@/lib/useSpeechSynthesis";
 import { cn } from "@/lib/utils";
 
-type SpeechQuestion =
-  | ReadAloudQuestion
-  | RepeatSentenceQuestion
-  | RetellLectureQuestion
-  | AnswerShortQuestion
-  // Fase 7: os 3 tipos novos também são fala (DI mostra a imagem no lugar do texto).
-  | SgdQuestion
-  | RespondSituationQuestion
-  | DescribeImageQuestion;
+// SpeechQuestion e o gradador por tipo de fala vivem em @/lib/pte/examSpeech
+// (D18-0b): prática e exame compartilham a MESMA política oral (oralPolicy).
 
 interface ExamWidgetProps {
   /** Registra o submit da questão — o cronômetro chama ao zerar (auto-submit). */
