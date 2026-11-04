@@ -1,14 +1,13 @@
-# Roadmap (atalho) — Projeto 17 · Refinamento visual AAA (mobile-first)
+# Roadmap (atalho) — Projeto 18 · Melhorias de alto impacto (propósito central)
 
-O roadmap normativo do remix vive em `.opencode/roadmap-proj17.md` (protocolo
-dos 3 arquivos: `.opencode/project17.md` · `prd-project17.md` · `roadmap-proj17.md`).
+O roadmap normativo do remix vive em `.opencode/roadmap-proj18.md` (protocolo
+dos 3 arquivos: `.opencode/project18.md` · `prd-project18.md` · `roadmap-proj18.md`).
 
-Estado: projeto 17 CONCLUÍDO (F0–F6 todos [x], 2026-11-03). Gates finais:
-vitest 703/703 · tsgo limpo · build OK (precache 129, sw br72xmu) · lint 0/0 ·
-E2E `scripts/e2e/proj17_f0.py` exit 0 (11 rotas 390×844: overflow 0, alvos
-≥44px, axe 0, footer×TabBar 0px, console limpo; estados e light+dark capturados).
-Relato de conformidade da F5: devolvido e resolvido por evidência direta (PRD §12).
-Monitor consultado: 0 findings pendentes.
+Estado: pilares centrais do 18 completos (planejamento · PRD · roadmap);
+execução iniciando pela onda 1 (s1 F0 integridade · s2 F5 vocabulário ·
+s3 F6 read_fib_bank). Linha de base confirmada neste remix: vitest 703/703 ·
+projeto 17 concluído (E2E proj17_f0.py exit 0). Monitor indisponível nesta
+sandbox (obs. do Plan.md — pular o que depender do monitor).
 
-Próximo remix: {N} vigente = project18 (null) — aguardando diretriz do usuário.
-Sem diretriz, o remix fica cancelado até nova mensagem que defina "project18".
+Próximo remix: continuar a partir da primeira fase pendente em
+`.opencode/roadmap-proj18.md`.
